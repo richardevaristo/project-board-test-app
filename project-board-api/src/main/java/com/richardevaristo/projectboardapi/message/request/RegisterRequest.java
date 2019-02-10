@@ -1,24 +1,10 @@
-package com.richardevaristo.projectboardapi.model;
+package com.richardevaristo.projectboardapi.message.request;
 
-import org.hibernate.annotations.NaturalId;
-
-import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-@Entity
-@Table(name = "users", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {
-                "username", "email"
-        }),
-})
-public class User {
-
-    @Id
-    @GeneratedValue
-    private long id;
-
+public class RegisterRequest {
     @NotBlank
     @Size(min = 3, max = 50)
     private String firstname;
@@ -28,45 +14,17 @@ public class User {
     private String lastname;
 
     @NotBlank
-    @Size(min = 6, max = 50)
+    @Size(min = 3, max = 50)
     private String username;
 
-    @NaturalId
     @NotBlank
-    @Size(max = 50)
+    @Size(max = 60)
     @Email
     private String email;
 
     @NotBlank
-    @Size(min = 8, max = 100)
+    @Size(min = 6, max = 40)
     private String password;
-
-    public User() {
-    }
-
-    public User(
-            @NotBlank @Size(min = 3, max = 50) String firstname,
-            @NotBlank @Size(min = 3, max = 50) String lastname,
-            @NotBlank @Size(min = 6, max = 50) String username,
-            @NotBlank @Size(max = 50) @Email String email,
-            @NotBlank @Size(min = 8, max = 100) String password
-    ) {
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.username = username;
-        this.email = email;
-        this.password = password;
-    }
-
-
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public String getFirstname() {
         return firstname;
